@@ -16,6 +16,19 @@ public class MarkdownParse {
             
 
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
+            
+            // testing back tip
+            int nextCodeBlock = markdown.indexOf("`", currentIndex);
+            // System.out.println("nextCodeBlock: " + nextCodeBlock);
+            if(nextCodeBlock < nextOpenBracket && nextCodeBlock != -1) {
+                int endOfCodeBlock = markdown.indexOf("`", nextCodeBlock+1);
+                // System.out.println("endOfCodeBlock: " + endOfCodeBlock);
+                
+                currentIndex = endOfCodeBlock + 1;
+                continue;
+            }
+
+
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             if(nextOpenBracket == -1 || nextCloseBracket == -1){
                 break;
